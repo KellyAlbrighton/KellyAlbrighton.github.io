@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kelly Albrighton — Selected Works" />
+  <title>Kelly Albrighton — Selected Works</title>
+
+  <style>
+    :root {
+      --bg: #f0e7da;
+      --bg-top: #f5eee4;
+      --card: rgba(255, 252, 247, 0.78);
+      --text: #17120e;
+      --muted: #776d63;
+      --line: rgba(23, 18, 14, 0.12);
+      --accent: #725037;
+      --shadow: 0 14px 42px rgba(44, 31, 20, 0.055);
+      --radius-card: 20px;
+      --radius-art: 16px;
+      --ease: 220ms ease;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 13% 7%, rgba(255,255,255,.78), transparent 28rem),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    button,
+    input { font: inherit; }
+
+    .page {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 76px 0 72px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 36px;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family:
+        "Iowan Old Style", "Baskerville", "Palatino Linotype",
+        "Book Antiqua", "Times New Roman", serif;
+      font-size: clamp(52px, 8.8vw, 88px);
+      font-weight: 600;
+      line-height: .92;
+      letter-spacing: -.035em;
+    }
+
+    .role {
+      margin: 19px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: .02em;
+    }
+
+    .hero-note {
+      max-width: 310px;
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+      text-align: right;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--line);
+    }
+
+    .tracks {
+      display: grid;
+      gap: 18px;
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: 142px 1fr;
+      gap: 26px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.76);
+      border-radius: var(--radius-card);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition:
+        transform var(--ease),
+        box-shadow var(--ease),
+        border-color var(--ease);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .track:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 50px rgba(44, 31, 20, 0.075);
+        border-color: rgba(255,255,255,.94);
+      }
+    }
+
+    .art {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: var(--radius-art);
+      isolation: isolate;
+      transition: filter var(--ease), transform var(--ease);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .track:hover .art {
+        filter: brightness(1.035);
+        transform: scale(1.004);
+      }
+    }
+
+    .art::before,
+    .art::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: .9;
+    }
+
+    .art::before {
+      width: 100px;
+      height: 100px;
+      top: -18px;
+      right: -20px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .art::after {
+      width: 74px;
+      height: 74px;
+      left: -12px;
+      bottom: -10px;
+      background: rgba(255,255,255,.10);
+    }
+
+    .art span {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      z-index: 1;
+      color: rgba(255,255,255,.95);
+      font-family:
+        "Iowan Old Style", "Baskerville", "Palatino Linotype",
+        "Book Antiqua", "Times New Roman", serif;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -.018em;
+    }
+
+    .art.die {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.05), transparent 40%),
+        radial-gradient(circle at 68% 30%, #8f867e 0, #38332f 28%, #171616 72%);
+    }
+
+    .art.mazurka {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 9px, transparent 9px 18px),
+        linear-gradient(145deg, #6b4d38, #211a17 76%);
+    }
+
+    .art.yantian {
+      background:
+        linear-gradient(180deg, #d6b475 0%, #8e6746 45%, #27343c 46%, #151a1d 100%);
+    }
+
+    .track-main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .track-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .track h2 {
+      margin: 0 0 6px;
+      font-family:
+        "Iowan Old Style", "Baskerville", "Palatino Linotype",
+        "Book Antiqua", "Times New Roman", serif;
+      font-size: clamp(23px, 4vw, 31px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+    }
+
+    .track h2.cn-title {
+      font-family:
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Noto Sans CJK SC", sans-serif;
+      font-size: clamp(22px, 3.7vw, 29px);
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .standalone {
+      margin: 0 0 7px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tagline {
+      margin: 8px 0 0;
+      color: rgba(119, 109, 99, .88);
+      font-family:
+        "Iowan Old Style", "Baskerville", "Palatino Linotype",
+        "Book Antiqua", "Times New Roman",
+        "STSong", "Songti SC", "Noto Serif CJK SC", serif;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: .08em;
+    }
+
+    .duration {
+      flex: 0 0 auto;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player {
+      display: grid;
+      grid-template-columns: 44px 1fr 96px;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .play {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--text);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition:
+        transform var(--ease),
+        box-shadow var(--ease),
+        opacity var(--ease);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .play:hover {
+        transform: scale(1.035);
+        box-shadow: 0 7px 18px rgba(24,19,15,.16);
+      }
+    }
+
+    .play:active { transform: scale(.97); }
+
+    .play svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .timeline {
+      min-width: 0;
+    }
+
+    .progress,
+    .volume {
+      width: 100%;
+      margin: 0;
+      appearance: none;
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .progress {
+      height: 3px;
+      background: linear-gradient(
+        to right,
+        var(--text) 0%,
+        var(--text) var(--progress, 0%),
+        rgba(24,19,15,.16) var(--progress, 0%),
+        rgba(24,19,15,.16) 100%
+      );
+    }
+
+    .volume {
+      height: 3px;
+      background: linear-gradient(
+        to right,
+        var(--text) 0%,
+        var(--text) var(--volume, 100%),
+        rgba(24,19,15,.16) var(--volume, 100%),
+        rgba(24,19,15,.16) 100%
+      );
+    }
+
+    .progress::-webkit-slider-thumb,
+    .volume::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--text);
+      box-shadow: 0 0 0 4px rgba(24,19,15,.07);
+      transition: transform var(--ease), box-shadow var(--ease);
+    }
+
+    .progress::-moz-range-thumb,
+    .volume::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--text);
+      box-shadow: 0 0 0 4px rgba(24,19,15,.07);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .progress:hover::-webkit-slider-thumb,
+      .volume:hover::-webkit-slider-thumb {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 5px rgba(24,19,15,.09);
+      }
+    }
+
+    .times {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .volume-wrap {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .volume-icon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      opacity: .82;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-top: 42px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .signature {
+      color: var(--text);
+      font-family:
+        "Iowan Old Style", "Baskerville", "Palatino Linotype",
+        "Book Antiqua", "Times New Roman", serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .email-label {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(24,19,15,.25);
+      transition: border-color var(--ease);
+    }
+
+    .contact a:hover {
+      border-bottom-color: var(--text);
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(100% - 20px, 620px);
+        padding-top: 40px;
+      }
+
+      .hero {
+        display: block;
+        margin-bottom: 34px;
+      }
+
+      .hero-note {
+        margin-top: 20px;
+        text-align: left;
+      }
+
+      .track {
+        grid-template-columns: 92px 1fr;
+        gap: 16px;
+        padding: 14px;
+      }
+
+      .track-head {
+        margin-bottom: 15px;
+      }
+
+      .art span {
+        left: 10px;
+        bottom: 9px;
+        font-size: 14px;
+      }
+
+      .volume-wrap {
+        display: none;
+      }
+
+      .player {
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+      }
+
+      .play {
+        width: 40px;
+        height: 40px;
+      }
+
+      .contact {
+        display: block;
+      }
+
+      .contact > div + div {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .track {
+        grid-template-columns: 1fr;
+      }
+
+      .art {
+        aspect-ratio: 16 / 7;
+      }
+
+      .track h2,
+      .track h2.cn-title {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Selected Works</p>
+        <h1>Kelly<br>Albrighton</h1>
+        <p class="role">Composer · Sound Designer</p>
+      </div>
+
+      <p class="hero-note">影视配乐、钢琴与管弦乐作品选</p>
+    </header>
+
+    <h2 class="section-title">Music</h2>
+
+    <section class="tracks">
+      <article class="track">
+        <div class="art die" aria-hidden="true">
+          <span>Die<br>Then</span>
+        </div>
+
+        <div class="track-main">
+          <div class="track-head">
+            <div>
+              <h2>Die Then</h2>
+              <p class="standalone">Standalone Version</p>
+              <p class="meta">电影配乐 · 经重新编排与调整</p>
+            </div>
+            <span class="duration">1:58</span>
+          </div>
+
+          <div class="player" data-player>
+            <button class="play" type="button" aria-label="播放 Die Then">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </button>
+
+            <div class="timeline">
+              <input class="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+              <div class="times">
+                <span class="current">0:00</span>
+                <span class="total">1:58</span>
+              </div>
+            </div>
+
+            <div class="volume-wrap">
+              <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12zm0-7.5v2.06A7 7 0 0 1 19 12a7 7 0 0 1-3.5 6.06v2.06A9 9 0 0 0 21 12a9 9 0 0 0-5.5-7.5z"/>
+              </svg>
+              <input class="volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+            </div>
+
+            <audio preload="metadata">
+              <source src="die-then.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+      </article>
+
+      <article class="track">
+        <div class="art mazurka" aria-hidden="true">
+          <span>Mazurka<br>in E minor</span>
+        </div>
+
+        <div class="track-main">
+          <div class="track-head">
+            <div>
+              <h2>Mazurka in E minor</h2>
+              <p class="meta">钢琴独奏</p>
+            </div>
+            <span class="duration">3:29</span>
+          </div>
+
+          <div class="player" data-player>
+            <button class="play" type="button" aria-label="播放 Mazurka in E minor">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </button>
+
+            <div class="timeline">
+              <input class="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+              <div class="times">
+                <span class="current">0:00</span>
+                <span class="total">3:29</span>
+              </div>
+            </div>
+
+            <div class="volume-wrap">
+              <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12zm0-7.5v2.06A7 7 0 0 1 19 12a7 7 0 0 1-3.5 6.06v2.06A9 9 0 0 0 21 12a9 9 0 0 0-5.5-7.5z"/>
+              </svg>
+              <input class="volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+            </div>
+
+            <audio preload="metadata">
+              <source src="mazurka-in-e-minor.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+      </article>
+
+      <article class="track">
+        <div class="art yantian" aria-hidden="true">
+          <span>盐田港的<br>日出</span>
+        </div>
+
+        <div class="track-main">
+          <div class="track-head">
+            <div>
+              <h2 class="cn-title">盐田港的日出</h2>
+              <p class="meta">管弦乐作品</p>
+              <p class="tagline">“破晓……”</p>
+            </div>
+            <span class="duration">9:45</span>
+          </div>
+
+          <div class="player" data-player>
+            <button class="play" type="button" aria-label="播放 盐田港的日出">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </button>
+
+            <div class="timeline">
+              <input class="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+              <div class="times">
+                <span class="current">0:00</span>
+                <span class="total">9:45</span>
+              </div>
+            </div>
+
+            <div class="volume-wrap">
+              <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.87v5.74A3.5 3.5 0 0 0 15.5 12zm0-7.5v2.06A7 7 0 0 1 19 12a7 7 0 0 1-3.5 6.06v2.06A9 9 0 0 0 21 12a9 9 0 0 0-5.5-7.5z"/>
+              </svg>
+              <input class="volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+            </div>
+
+            <audio preload="metadata">
+              <source src="yantian-port-at-sunrise.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="contact">
+      <div class="signature">Kelly Albrighton</div>
+      <div>
+        <div class="email-label">Email</div>
+        <a href="mailto:gogogoaby@gmail.com">gogogoaby@gmail.com</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const players = [...document.querySelectorAll("[data-player]")];
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) return "0:00";
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${minutes}:${secs}`;
+    }
+
+    function setPlayIcon(button, isPlaying) {
+      button.innerHTML = isPlaying
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"></path></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>';
+    }
+
+    players.forEach((player) => {
+      const audio = player.querySelector("audio");
+      const playButton = player.querySelector(".play");
+      const progress = player.querySelector(".progress");
+      const current = player.querySelector(".current");
+      const total = player.querySelector(".total");
+      const volume = player.querySelector(".volume");
+
+      volume.style.setProperty("--volume", `${Number(volume.value) * 100}%`);
+
+      playButton.addEventListener("click", async () => {
+        if (audio.paused) {
+          players.forEach((otherPlayer) => {
+            const otherAudio = otherPlayer.querySelector("audio");
+            const otherButton = otherPlayer.querySelector(".play");
+
+            if (otherAudio !== audio) {
+              otherAudio.pause();
+              setPlayIcon(otherButton, false);
+            }
+          });
+
+          try {
+            await audio.play();
+          } catch (error) {
+            alert("音频没有找到。请确认 MP3 文件名正确，并与 index.html 放在同一个文件夹。");
+          }
+        } else {
+          audio.pause();
+        }
+      });
+
+      audio.addEventListener("play", () => setPlayIcon(playButton, true));
+      audio.addEventListener("pause", () => setPlayIcon(playButton, false));
+      audio.addEventListener("ended", () => setPlayIcon(playButton, false));
+
+      audio.addEventListener("loadedmetadata", () => {
+        total.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener("timeupdate", () => {
+        current.textContent = formatTime(audio.currentTime);
+        const percent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        progress.value = percent;
+        progress.style.setProperty("--progress", `${percent}%`);
+      });
+
+      progress.addEventListener("input", () => {
+        if (audio.duration) {
+          audio.currentTime = (progress.value / 100) * audio.duration;
+        }
+        progress.style.setProperty("--progress", `${progress.value}%`);
+      });
+
+      volume.addEventListener("input", () => {
+        audio.volume = Number(volume.value);
+        volume.style.setProperty("--volume", `${Number(volume.value) * 100}%`);
+      });
+    });
+  </script>
+</body>
+</html>
